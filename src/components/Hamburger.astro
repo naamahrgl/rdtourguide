@@ -1,0 +1,13 @@
+---
+import { line , hamburger, navlinks} from "../styles/styles"
+---
+<div id="hamburger" class={hamburger}>
+    <span class={line}></span>
+    <span class={line}></span>
+    <span class={line}></span>
+</div>
+<script>
+  document.getElementById('hamburger')?.addEventListener('click', () => {
+    document.getElementById('navlinks')?.classList.toggle('hidden');
+  });
+</script>

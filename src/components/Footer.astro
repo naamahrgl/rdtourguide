@@ -1,0 +1,79 @@
+---
+// src/components/Footer.astro
+import Navigation from './Navigation.astro';
+import {
+  footer, footerContainer, footerSection, footerHeading, footerText,
+  footerLink, socialContainer, socialIcon, copyright,
+  footerNavContainer
+} from '../styles/styles';
+
+interface Props {
+  lang?: 'he' | 'en';
+}
+
+const props = Astro.props as Props;
+const lang = ['he', 'en'].includes(Astro.url.pathname.split("/")[1])
+  ? (Astro.url.pathname.split("/")[1] as "he" | "en")
+  : "he";
+
+
+const translations = {
+  he: {
+    hero_title: 'שביליטו',
+    hero_slogan: 'כרמל אבני - מורה דרך',
+    gan: 'רמת השופט',
+    lin: 'קישורים מהירים',
+    footer_contactUs: 'דברו איתנו',
+    footer_contactText: 'אפשר לשלוח לנו מייל בכל שאלה, הערה או המלצה :)',
+    footer_copyright: 'כל הזכויות שמורות לשביליטו © 2025',
+  },
+  en: {
+    hero_title: 'Shvilito',
+    hero_slogan: 'Carmel Avni - a teacher for the road :)',
+    gan: 'Ramat HaShofet',
+    lin: 'Quick Links',
+    footer_contactUs: 'Contact Us',
+    footer_contactText: 'Feel free to email us with any question, comment, or suggestion :)',
+    footer_copyright: 'All rights reserved to Shvilito © 2025',
+  }
+};
+
+const t = translations[lang as 'he'|'en'];
+---
+
+<footer class={footer}>
+  <div class={footerContainer}>
+
+    <!-- Section 1 -->
+    <div class={footerSection}>
+      <h4 class={footerHeading}>{t.hero_title}</h4>
+      <p class={footerText}>{t.hero_slogan}</p>
+      <p class={footerText}>{t.gan}</p>
+      <div class={socialContainer}>
+        <a href="https://www.instagram.com/shvilito_tours/"><img src="/Instagram_Glyph_Black.svg" alt="Instagram" class={socialIcon} /></a>
+        <a href="https://www.facebook.com/Shvilito.tours"><img src="/facebook.svg" alt="Facebook" class={socialIcon} /></a>
+        <a href="https://wa.me/c/972507235363"><img src="/Digital_Glyph_Black.svg" alt="Whatsapp" class={socialIcon} /></a>
+                <a href="mailto:melavni@gmail.com"><img src="/email.svg" alt="email" class={socialIcon} /></a>
+
+      </div>
+    </div>
+
+    <!-- Section 2 (Quicklinks) – pass lang and override classes; use footerNavContainer to ensure it's visible in footer -->
+    <div class={footerSection}>
+            <h4 class={footerHeading}>{t.lin}</h4>
+      <Navigation lang={lang} overrideClass={footerLink} containerClass={footerNavContainer} />
+    </div>
+
+    <!-- Section 3 -->
+    <div class={footerSection}>
+      <h4 class={footerHeading}>{t.footer_contactUs}</h4>
+      <p class={footerText}>{t.footer_contactText}</p>
+      <a href="mailto:melavni@gmail.com" class={footerLink}>melavni@gmail.com</a>
+    </div>
+
+  </div>
+
+  <div class={copyright}>
+    {t.footer_copyright}
+  </div>
+</footer>
