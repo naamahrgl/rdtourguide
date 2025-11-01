@@ -1,0 +1,27 @@
+---
+import RecommendationsPage from "../../components/RecommendationsPage.tsx";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'he' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const lang = (Astro.params.lang === 'en' || Astro.params.lang === 'he') ? Astro.params.lang : 'he';
+
+const t = {
+  he: {
+    title: "צרו קשר",
+
+  },
+  en: {
+    title: "Contact Us",
+
+  },
+}[lang];
+---
+<BaseLayout pageTitle={t.title} lang={lang} dir={lang === 'he' ? 'rtl' : 'ltr'}>
+
+<RecommendationsPage client:only="react" lang={lang} />
+</BaseLayout>

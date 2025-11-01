@@ -1,0 +1,35 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  pageTitle: string;
+  lang?: "he" | "en";
+  dir?: "rtl" | "ltr";
+}
+
+const { pageTitle, lang = "he", dir = lang === "he" ? "rtl" : "ltr" } = Astro.props;
+const isRtl = dir === "rtl";
+---
+
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+  </head>
+
+  <body class="relative overflow-x-hidden bg-[#6B7C8F] text-white font-sans">
+    <Header lang={lang} />
+
+<main class="relative flex flex-col items-center gap-12 md:gap-20 py-10 md:py-16">
+
+
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>
