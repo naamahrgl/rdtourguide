@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Box, Title, Button } from '../../components/ui';
+import { ContactForm } from '../../components/ui';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'he' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const lang = (Astro.params.lang === 'he' || Astro.params.lang === 'en') ? Astro.params.lang : 'he';
+const content = {
+  he: {
+    title: "סיורי גרפיטי ואמנות רחוב",
+    subtitle: "מסלולים מעשירים לכל גיל",
+    trips: [
+      {
+        name: "סיור בפלורנטין",
+        description: "פלורנטין, שכונת ההיפסטרים התל-אביבית ומכתיבת הקצב של סצינת הגרפיטי בעיר. בסיור נשוטט בין הסמטאות הצבעוניות, נגלה יצירות חדשות לצד קלאסיקות ותיקות, ונלמד לקרוא את שפת הרחוב.  נכיר אמנים מקומיים, נדבר על טכניקות, מסרים פוליטיים, ועל הרגע שבו קיר ישן הופך ליצירה. בין ציור לציור גם נשמע סיפורים מהווי השכונה - על בוהמה, מוסיקה, בתי מלאכה, ונגלה את סוד המשיכה של השכונה המתחדשת. ",
+        image: { src: "/rd.png", alt: "סיור בפלורנטין" }
+      },
+      {
+        name: "סיור בנחלת בנימין",
+        description: "מדרחוב נחלת בנימין הוא מהמקסימים והציוריים בארץ. בין הבתים המעוצבים, חנויות הבדים והשוק מסתתרת גלריית רחוב של ממש. נשוטט בין ציורי הקיר, נדבר על הרחוב כפלטפורמה לאמנים לפרוץ אל התודעה, לבקר את החברה, להביא לשינוי כלשהו. זהו סיור שמחבר בין ישן לחדש, בין המחתרת לממסד ובין האמנות למתבונן.",
+        image: { src: "/rd.png", alt: "סיור בנחלת בנימין" }
+      },
+      {
+        name: "סיור בקריית המלאכה",
+        description: "אזור קריית המלאכה הוא שמורת טבע תעשייתית ייחודית במינה בארץ. בין רחובותיה ריכוז של אמנות רחוב שלא ניתן למצוא בשום מקום אחר, ועם למעלה מ300 אמנים, סטודיו וחללי יצירה, גלריות ועסקים, במקום מתקיים הריכוז האומנותי הגדול בארץ. בהתאם לכך אומנות הרחוב המוצגת כאן היא ישירה, בועטת, לעיתים מכווצת את הלב, מייצרת לנו סיור גרפיטי למתקדמים.",
+        image: { src: "/rd.png", alt: "סיור בקריית המלאכה" }
+      },
+
+    ]
+  },
+  en: {
+    title: "Graffiti and Street Art Tours",
+    subtitle: "City Beauty for Everyone",
+    trips: [
+      {
+        name: "Florentin Tour",
+        description: "Florentin, Tel Aviv's hipster neighborhood and the heart of the city's graffiti scene. On the tour, we'll wander through the colorful alleys, discover new works alongside old classics, and learn to read the language of the street. We will meet local artists, talk about techniques, political messages, and the moment when an old wall becomes a work of art. Between each painting, we will also hear stories about the neighborhood - about bohemia, music, workshops, and discover the secret of the renewed neighborhood's appeal.",
+        image: { src: "/rd.png", alt: "Outdoor Treks" }
+      },
+      {
+        name: "Nahalat Binyamin Tour",
+        description: "The Nahalat Binyamin pedestrian street is one of the most charming and picturesque in the country. Among the decorated houses, the fabric shops and the market, a real street gallery is hidden. We will wander among the murals, we will talk about the street as a platform for artists to break into consciousness, criticize society, and bring about some kind of change. This is a tour that connects old and new, between the underground and the establishment, and between art and the observer.",
+        image: { src: "/rd.png", alt: "Nahalat Binyamin Tour" }
+      },
+      {
+        name: "Kiryat El-Melacha Tour",
+        description: "The Kiryat El-Melacha area is a unique industrial nature reserve in the country. Among its streets is a concentration of street art that cannot be found anywhere else, and with over 300 artists, studios and creative spaces, galleries and businesses, the place hosts the largest artistic concentration in the country. Accordingly, the street art displayed here is direct, kicking, sometimes heart-wrenching, creating a graffiti tour for advanced users.",
+        image: { src: "/rd.png", alt: "Kiryat El-Melacha Tour" }
+      },
+
+    ]
+  }
+};
+
+const { title, subtitle, trips } = content[lang];
+---
+
+<BaseLayout pageTitle={title} lang={lang} dir={lang === 'he' ? 'rtl' : 'ltr'}>
+  <section class="py-16 md:py-24 px-4">
+    <div class="container mx-auto flex flex-col gap-12">
+ 
+      <Box className="p-8 bg-[#a0aebd] text-[#6B7C8F]">
+        <Title text={title} size="lg" className="mb-2" />
+        <Title text={subtitle} size="md" className="mb-6" />
+      </Box>
+
+      {trips.map((trip, idx) => (
+        <Box  className="flex flex-col md:flex-row gap-6 p-6 bg-[#F8FCFE] text-[#6B7C8F] shadow-lg rounded-lg">
+          {trip.image && (
+            <div class="md:w-1/3 flex-shrink-0 rounded-lg overflow-hidden">
+              <img src={trip.image.src} alt={trip.image.alt}   class="w-full h-48 md:h-56 object-cover rounded-lg" />
+            </div>
+          )}
+          <div class="flex-1 flex flex-col gap-4">
+            <Title text={trip.name} size="md" />
+            <p class="text-gray-700 leading-relaxed">{trip.description}</p>
+          </div>
+        </Box>
+      ))}
+
+    </div>
+      <section class="max-w-xl mx-auto px-4 py-12">
+    <ContactForm  lang={lang} client:only="react" />
+  </section>
+  <section class="max-w-6xl mx-auto px-4 py-12">
+        <div class="text-center">
+      <Button
+        text={lang === "he" ? "חזרה לעמוד הבית" : "Back to home page"}
+        href={`/${lang}/`}
+        variant="secondary"
+      />
+    </div>
+  </section>
+
+  </section>
+</BaseLayout>

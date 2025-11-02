@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Box, Title, Button } from '../../components/ui';
+import { ContactForm } from '../../components/ui';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'he' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const lang = (Astro.params.lang === 'he' || Astro.params.lang === 'en') ? Astro.params.lang : 'he';
+const content = {
+  he: {
+    title: "סיורי שכונות, היסטוריה ותרבות",
+    subtitle: "מסלולים מעניינים לכל גיל",
+    trips: [
+      {
+        name: "סיור ביפו העתיקה ובשוק הפשפשים",
+        description: "את הקסם הנגלה בכל פינה מסמטאותיה של יפו העתיקה קשה לתאר במילים. אחת מערי הנמל העתיקות בעולם, בה נאספו לאורך אלפי שנות קיומה סיפורים על מלכים, צוררים, נביאים ודמויות מיתולוגיות שיהפכו את העיר לאחד מאתרי התיירות הפופולרים ביותר בישראל. יפו החדשה אשר מחוץ לחומות היא דוגמה ומופת לשימור הקיים ולחידוש מדוקדוק אשר יצרו אזור בילוי מגוון וצבעוני במיוחד.",
+              image: { src: "/rd.png", alt: "סיור בפלורנטין" }
+      },
+      {
+        name: "סיור בעקבות סיפורה של תל אביב",
+        description: "איך נולדת עיר? במסלול המתחיל ביפו, דרך השכונות הציוריות נווה צדק ואחוזת בית, ועד שדרות רוטשילד, נספר את סיפור הקמתה של העיר העברית הראשונה. בסיור נכיר פנינות אדריכליות מסגנונות שונים, נספר סיפורים על המבנים החשובים שנראה בדרך. נפגוש בדמויות שחלמו בגדול, התווכחו, נלחמו וגם הגשימו את החזון שכולו חוצפה עברית, ונחווה את עוצמתה של הבירה הכלכלית של ישראל.",
+                      image: { src: "/rd.png", alt: "סיור בנחלת בנימין" }
+      },
+      {
+        name: "סיור בשביל העצמאות",
+        description: "בסיור נשוטט לאורך שביל העצמאות שהוקם לרגל חגיגות שבעים שנות עצמאות למדינת ישראל וכולל עשר תחנות המשלבות בין סיפור הקמת מדינת ישראל לסיפור הקמת העיר תל אביב. מבתיה הראשונים של העיר אשר נבנו בכוח עבודה עברי, דרך הסיכסוכים (הרבים!) בין אנשי החזון ועד הכרזת העצמאות. נדבר אדריכלות מקומית, רוח ציונית ושפה עברית.",
+                    image: { src: "/rd.png", alt: "סיור בקריית המלאכה" }
+      },
+
+    ]
+  },
+  en: {
+    title: "Local History and Culture Tours",
+    subtitle: "City Life for Everyone",
+    trips: [
+      {
+        name: "Old Jaffa and Flea Market Tour",
+        description: "The magic that is revealed in every corner of the alleys of Old Jaffa is difficult to describe in words. One of the oldest port cities in the world, where stories of kings, tyrants, prophets and mythological figures were collected over thousands of years of its existence that would make the city one of the most popular tourist sites in Israel. New Jaffa, outside the walls, is an example of preservation of the existing and meticulous renovation that created an especially diverse and colorful entertainment area.",
+              image: { src: "/rd.png", alt: "Levinsky Market Food Tour", }
+      },
+      {
+        name: "Tel Aviv Story Tour",
+        description: "How was a city born? On the route that begins in Jaffa, through the picturesque neighborhoods of Neve Tzedek and Ahuzat Beit, and to Rothschild Boulevard, we will tell the story of the founding of the first Hebrew city. On the tour, we will get to know architectural gems from different styles, we will tell stories about the important buildings we will see along the way. We will meet characters who dreamed big, argued, fought and also realized the vision that is all Hebrew audacity, and we will experience the power of Israel's economic capital.",
+           image: { src: "/rd.png", alt:"Flea Market Food Tour",}
+      },
+      {
+        name: "Independence Trail Tour",
+        description: "On the tour, we will wander along the Independence Trail, which was established to celebrate the seventy years of independence of the State of Israel and includes ten stations that combine the story of the founding of the State of Israel with the story of the founding of the city of Tel Aviv. From the city's first houses, which were built by Jewish labor, through the conflicts (many!) between the visionaries, to the Declaration of Independence. We will talk about local architecture, the Zionist spirit, and the Hebrew language.",
+                  image: { src: "/rd.png", alt: "Carmel Market Food Tour", }
+      },
+
+
+    ]
+  }
+};
+
+const { title, subtitle, trips } = content[lang];
+---
+
+<BaseLayout pageTitle={title} lang={lang} dir={lang === 'he' ? 'rtl' : 'ltr'}>
+  <section class="py-16 md:py-24 px-4">
+    <div class="container mx-auto flex flex-col gap-12">
+ 
+      <Box className="p-8 bg-[#a0aebd] text-[#6B7C8F]">
+        <Title text={title} size="lg" className="mb-2" />
+        <Title text={subtitle} size="md" className="mb-6" />
+      </Box>
+
+      {trips.map((trip, idx) => (
+        <Box  className="flex flex-col md:flex-row gap-6 p-6 bg-[#F8FCFE] text-[#6B7C8F] shadow-lg rounded-lg">
+          {trip.image && (
+            <div class="md:w-1/3 flex-shrink-0 rounded-lg overflow-hidden">
+              <img src={trip.image.src} alt={trip.image.alt}   class="w-full h-48 md:h-56 object-cover rounded-lg" />
+            </div>
+          )}
+          <div class="flex-1 flex flex-col gap-4">
+            <Title text={trip.name} size="md" />
+            <p class="text-gray-700 leading-relaxed">{trip.description}</p>
+          </div>
+        </Box>
+      ))}
+
+    </div>
+      <section class="max-w-xl mx-auto px-4 py-12">
+    <ContactForm  lang={lang} client:only="react" />
+  </section>
+  <section class="max-w-6xl mx-auto px-4 py-12">
+        <div class="text-center">
+      <Button
+        text={lang === "he" ? "חזרה לעמוד הבית" : "Back to home page"}
+        href={`/${lang}/`}
+        variant="secondary"
+      />
+    </div>
+  </section>
+
+  </section>
+</BaseLayout>

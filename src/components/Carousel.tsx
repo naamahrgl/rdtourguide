@@ -4,11 +4,9 @@ import "keen-slider/keen-slider.min.css";
 import { Button } from "./ui";
 
 interface Recommendation {
-  id: string;
-  name_he: string;
-  name_en: string;
-  text_he: string;
-  text_en: string;
+  id: number;
+  name: string;
+  text: string;
 }
 
 interface Props {
@@ -34,7 +32,7 @@ export default function RecommendationsCarousel({ lang }: Props) {
     async function fetchRecs() {
       try {
         const res = await fetch(
-          "https://script.google.com/macros/s/AKfycbzg1_Z-kv6TgWbBss1orD7iOjxOoaolU5G2xnOiEH6tAaWapRJdb-yGus2Bb5YVEK6q/exec"
+          "https://script.google.com/macros/s/AKfycbxdkYKBS6ezOWEpIHOX4wsYB0jntjcacrXRQRtLeLiJhc0my__WkeVEvrrXbUhWLVz9IA/exec"
         );
         const data = await res.json();
         setRecs(data);
@@ -109,18 +107,18 @@ useEffect(() => {
         {duplicated.map((rec, idx) => (
 <div
   key={`${rec.id}-${idx}`}
-  className="keen-slider__slide flex flex-col justify-between bg-white rounded-2xl shadow-md p-4 md:p-6 
+  className="keen-slider__slide flex flex-col justify-between bg-white text-[#6B7C8F] rounded-2xl shadow-md p-4 md:p-6 
              text-center border border-gray-200 flex-shrink-0 
              min-w-[260px] max-w-[400px] w-[80vw] md:w-[360px]"
 >
 <p className="text-sm md:text-base italic mb-4 leading-relaxed">
-  "{(lang === "he" ? rec.text_he : rec.text_en).slice(0, 220)}
-  {((lang === "he" ? rec.text_he : rec.text_en).length > 220) && "…"}"
+  "{(lang === "he" ? rec.text : rec.text).slice(0, 220)}
+  {((lang === "he" ? rec.text : rec.text).length > 220) && "…"}"
 </p>
 
 
   <h3 className="font-semibold text-gray-700 mt-auto text-sm md:text-base">
-    — {lang === "he" ? rec.name_he : rec.name_en}
+    — {lang === "he" ? rec.name : rec.name}
   </h3>
 
 </div>
@@ -133,7 +131,7 @@ useEffect(() => {
       <p>" " </p>
               <div className="block text-center">
       <Button
-        text={lang === "he" ? "קראו עוד" : "Read More"}
+        text={lang === "he" ? "עוד המלצות" : "More Recommendations"}
         href={`/${lang}/recommendations`}
         variant="primary"
       />

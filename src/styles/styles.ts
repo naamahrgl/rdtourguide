@@ -3,12 +3,12 @@ export const line = "block h-0.5 w-full bg-gray-600 mb-1 group-hover:bg-black";
 export const navlinks = "hidden absolute top-full right-0 flex flex-col gap-2 bg-white p-4 z-50";
 export const navlinkItem = "text-[#57715C] hover:text-black transition-colors duration-150";
 export const header =
-  "relative w-full flex items-center justify-between p-4 bg-[#ebe2da] sticky top-0 z-50";
+  "relative w-full flex items-center justify-between p-4 bg-[#a0aebd] sticky top-0 z-50";
 export const logo = "flex items-center gap-2";  
 export const langlink =
   "text-[10px] md:text-sm text-gray-600 hover:text-black transition-colors duration-150";
 
-export const footer = "w-full bg-[var(--brand-lighter)] border-t border-[#d0b8a8] text-[var(--brand-text-title)] text-sm";
+export const footer = "w-full bg-[#a0aebd] border-t  text-[var(--brand-text-title)] text-sm";
 export const footerContainer = "max-w-6xl mx-auto px-4 py-10 flex justify-between";
 export const footerSection = "w-1/3 text-center break-words"; 
 export const footerHeading = "font-semibold mb-2"; 

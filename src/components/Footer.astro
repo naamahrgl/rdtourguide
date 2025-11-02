@@ -19,22 +19,22 @@ const lang = ['he', 'en'].includes(Astro.url.pathname.split("/")[1])
 
 const translations = {
   he: {
-    hero_title: 'שביליטו',
-    hero_slogan: 'כרמל אבני - מורה דרך',
-    gan: 'רמת השופט',
+    hero_title: 'רועי דדו',
+    hero_slogan: 'מורה דרך',
+    gan: 'סיורים בתל אביב',
     lin: 'קישורים מהירים',
     footer_contactUs: 'דברו איתנו',
-    footer_contactText: 'אפשר לשלוח לנו מייל בכל שאלה, הערה או המלצה :)',
-    footer_copyright: 'כל הזכויות שמורות לשביליטו © 2025',
+    footer_contactText: 'שלחו מייל לכל שאלה',
+    footer_copyright: 'כל הזכויות שמורות לרועי דדו © 2025',
   },
   en: {
-    hero_title: 'Shvilito',
-    hero_slogan: 'Carmel Avni - a teacher for the road :)',
-    gan: 'Ramat HaShofet',
+    hero_title: 'Roey Dado',
+    hero_slogan: 'Tour Guide',
+    gan: 'Tel Aviv Tours',
     lin: 'Quick Links',
     footer_contactUs: 'Contact Us',
-    footer_contactText: 'Feel free to email us with any question, comment, or suggestion :)',
-    footer_copyright: 'All rights reserved to Shvilito © 2025',
+    footer_contactText: 'Feel free to email us with any question',
+    footer_copyright: 'All rights reserved to Roey Dado © 2025',
   }
 };
 
@@ -50,9 +50,8 @@ const t = translations[lang as 'he'|'en'];
       <p class={footerText}>{t.hero_slogan}</p>
       <p class={footerText}>{t.gan}</p>
       <div class={socialContainer}>
-        <a href="https://www.instagram.com/shvilito_tours/"><img src="/Instagram_Glyph_Black.svg" alt="Instagram" class={socialIcon} /></a>
-        <a href="https://www.facebook.com/Shvilito.tours"><img src="/facebook.svg" alt="Facebook" class={socialIcon} /></a>
-        <a href="https://wa.me/c/972507235363"><img src="/Digital_Glyph_Black.svg" alt="Whatsapp" class={socialIcon} /></a>
+        <a href="https://www.facebook.com/roey.dado"><img src="/facebook.svg" alt="Facebook" class={socialIcon} /></a>
+        <a href="https://wa.me/972545822811"><img src="/Digital_Glyph_Black.svg" alt="Whatsapp" class={socialIcon} /></a>
                 <a href="mailto:melavni@gmail.com"><img src="/email.svg" alt="email" class={socialIcon} /></a>
 
       </div>
@@ -68,7 +67,7 @@ const t = translations[lang as 'he'|'en'];
     <div class={footerSection}>
       <h4 class={footerHeading}>{t.footer_contactUs}</h4>
       <p class={footerText}>{t.footer_contactText}</p>
-      <a href="mailto:melavni@gmail.com" class={footerLink}>melavni@gmail.com</a>
+      <a href="mailto:roeydado@gmail.com" class={footerLink}>roeydado@gmail.com</a>
     </div>
 
   </div>

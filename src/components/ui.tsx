@@ -12,20 +12,23 @@ export const TW = {
     primary: "bg-white/20 text-white hover:bg-white/40",
     secondary: "bg-white text-[#6B7C8F] hover:bg-[#E8E9EB]",
             roundbase: "p-2  items-center justify-center",
-    round: "w-16 h-16 rounded-full  bg-[#f5eee7] items-center justify-center ",
+    round: "w-16 h-16 rounded-full  bg-white items-center justify-center ",
 
   },
   titles: {
-    sm: "text-xl font-semibold text-white",
-    md: "text-3xl font-bold text-white",
-    lg: "text-5xl font-extrabold text-white",
+    sm: "text-xl font-semibold text-[#F8FCFE]",
+    md: "text-3xl font-bold text-[#F8FCFE]",
+    lg: "text-5xl font-extrabold text-[#F8FCFE]",
   },
   text: {
     base: "text-white/90",
     secondary: "text-white/70",
   },
   containers: {
-    box: "p-6 rounded-lg shadow-lg bg-[#f5eee7]"}}
+    box: "p-6 rounded-lg shadow-lg bg-[#a0aebd]"},
+    images: {
+    default: "w-full rounded-lg shadow-lg",
+  },}
 
 /* -------------------- Button -------------------- */
 interface ButtonProps {
@@ -91,6 +94,16 @@ export function RoundButton({ text, href, onClick,  className = '' }: ButtonProp
   return href
     ? <a href={href} className={style}><img src={text} className=""  /></a>
     : <button onClick={onClick} className={style}>{text}</button>;
+}
+/* -------------------- Image -------------------- */
+interface ImageProps {
+  src: string;
+  alt: string;
+  className?: string;
+}
+
+export function Image({ src, alt, className = '' }: ImageProps) {
+  return <img src={src} alt={alt} className={`${TW.images.default} ${className}`} />;
 }
 
 /* line+sction item*/
@@ -181,7 +194,7 @@ export function ContactForm({ lang }: ContactFormProps) {
     <form
       method="POST"
       action="/api/contact"
-      className="space-y-4 w-full max-w-md mx-auto text-center"
+      className="space-y-4 w-full max-w-md mx-auto text-center bg-[#6B7C8F]"
     >
       <Title text={t.title} size="md" className="mb-6" />
 

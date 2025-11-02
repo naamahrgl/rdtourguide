@@ -75,8 +75,8 @@ useLayoutEffect(() => {
             y1={dotPositions[0]}
             x2={xPosition}
             y2={dotPositions[dotPositions.length - 1]}
-            stroke="#fffffe"
-            strokeWidth="5"
+            stroke="#CBD8E4"
+            strokeWidth="4"
           />
         )}
 
@@ -92,9 +92,9 @@ useLayoutEffect(() => {
               <circle
                 cx={xPosition}
                 cy={y}
-                r="8"
-                fill="#fffffe"
-                stroke="#6B7C8F"
+                r="7"
+                fill="#CBD8E4"
+                stroke="#8C9DB3"
                 strokeWidth="2.5"
                 className="cursor-pointer transition-transform duration-300 hover:scale-110"
               />
@@ -103,9 +103,9 @@ useLayoutEffect(() => {
   cx={xPosition}
   cy={y}
   r="10"
-  stroke="#6B7C8F"
-  strokeWidth="2"
-  fill="#fffffe"
+    fill="#CBD8E4"
+                stroke="#8C9DB3"
+                  strokeWidth="2"
   initial={{ scale: 1 }}
   animate={{
     scale: [1, 1.6, 1.1],

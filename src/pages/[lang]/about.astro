@@ -1,0 +1,76 @@
+---
+// src/pages/[lang]/about.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Box, Title, Button, Image } from '../../components/ui';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'he' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const content = {
+  he: {
+    subtitle: "היי!",
+    title: "קצת עליי",
+    paragraphs: [
+"\"תל אביב! אני מגיע, באתי להזיע, כי את היחידה אני נשבע.\" ~ הדג נחש",
+"שמי רועי, מורה דרך מוסמך, מספר סיפורים, וחוקר העיר תל אביב.",
+"כבר שנים שאני משוטט בעיר, באותן השכונות, באותם הרחובות - שואל, מתבונן ומגלה דברים חדשים בכל פעם. תל אביב עבורי היא עולם שלם של סיפורים שנגלה אם רק נפתח את הדלת לידה עברנו כבר אלף פעם, אם רק נרים את העיניים או נשאל שאלה חצופה.",
+"כל סיור איתי נתפר במיוחד להתאמה מלאה לקבוצה - משפחות, חברים לעבודה או תיירים מהארץ ומהעולם. אני מזמין אתכם להצטרף אליי למסע אורבני חווייתי שמחבר בין עבר להווה, בין אוכל לאמנות, בין רחוב לשיר.",
+"ב\"שביליטו\" אני מזמין אתכם לצאת איתי לדרך - לגלות, לחוות ולהתאהב בטבע מחדש."
+    ],
+    images: [
+      { src: "/rd.png", alt: "כרמל – שביליטו" }
+    ]
+  },
+  en: {
+    title: "About Me",
+    subtitle: "Hi!",
+    paragraphs: [
+"\"Tel Aviv! I'm coming, I came to sweat, because I swear you're the only one.\" ~ The Fish Snake",
+"My name is Roy, a certified tour guide, storyteller, and researcher of the city of Tel Aviv.",
+"For years I have been wandering the city, in the same neighborhoods, on the same streets - asking, observing and discovering new things each time. Tel Aviv for me is a whole world of stories that we will discover if we just open the door we have already passed a thousand times, if we just raise our eyes or ask a cheeky question.",
+"Each tour with me is tailor-made to fully accommodate the group - families, work colleagues or tourists from Israel and abroad. I invite you to join me on an experiential urban journey that connects past and present, food and art, street and song.",
+
+    ],
+    images: [
+      { src: "/rd.png", alt: "Carmel – Shvilito" }
+    ]
+  }
+};
+
+
+const lang = (Astro.params.lang === 'en' || Astro.params.lang === 'he') ? Astro.params.lang : 'he';
+const { title, subtitle, paragraphs, images } = content[lang];
+---
+
+<BaseLayout pageTitle={title} lang={lang} dir={lang === 'he' ? 'rtl' : 'ltr'}>
+  <section class="py-16 md:py-24 px-4">
+    <div class="container mx-auto flex flex-col gap-8">
+      <Box className="p-8 ">
+        <Title text={title} size="lg" className="mb-2" />
+        <Title text={subtitle} size="md" className="mb-6" />
+
+        {paragraphs.map((p, idx) => (
+          <p class="mb-4 text-gray-700 leading-relaxed">{p}</p>
+        ))}
+    <Image src="/rd.png" alt='' className="w-full h-full rounded-lg shadow-lg" />
+
+
+      </Box>
+
+    </div>
+
+  </section>
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <div class="text-center">
+      <Button
+        text={lang === "he" ? "חזרה לעמוד הבית" : "Back to home page"}
+        href={`/${lang}/`}
+        variant="secondary"
+      />
+    </div>
+  </section>
+</BaseLayout>

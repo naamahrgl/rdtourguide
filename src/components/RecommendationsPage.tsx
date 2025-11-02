@@ -3,10 +3,9 @@ import { Box } from "./ui";
 
 interface Recommendation {
   id: string;
-  name_he: string;
-  name_en: string;
-  text_he: string;
-  text_en: string;
+  name: string;
+
+  text: string;
 }
 
 interface Props {
@@ -21,7 +20,7 @@ export default function RecommendationsPage({ lang }: Props) {
     async function fetchRecs() {
       try {
         const res = await fetch(
-          "https://script.google.com/macros/s/AKfycbzg1_Z-kv6TgWbBss1orD7iOjxOoaolU5G2xnOiEH6tAaWapRJdb-yGus2Bb5YVEK6q/exec"
+          "https://script.google.com/macros/s/AKfycbxdkYKBS6ezOWEpIHOX4wsYB0jntjcacrXRQRtLeLiJhc0my__WkeVEvrrXbUhWLVz9IA/exec"
         );
         const data = await res.json();
         setRecs(data);
@@ -51,8 +50,8 @@ export default function RecommendationsPage({ lang }: Props) {
         }`}
       >
         {recs.map((rec, idx) => {
-          const text = lang === "he" ? rec.text_he : rec.text_en;
-          const name = lang === "he" ? rec.name_he : rec.name_en;
+          const text = lang === "he" ? rec.text : rec.text;
+          const name = lang === "he" ? rec.name : rec.name;
           const isRight = idx % 1 === 0;
 
           return (

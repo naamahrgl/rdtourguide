@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Box, Title, Button } from '../../components/ui';
+import { ContactForm } from '../../components/ui';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'he' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const lang = (Astro.params.lang === 'he' || Astro.params.lang === 'en') ? Astro.params.lang : 'he';
+const content = {
+  he: {
+    title: "טעימות גרפיטי ואמנות רחוב",
+    subtitle: "מסלולים טעימים לכל גיל",
+    trips: [
+      {
+        name: "סיור טעימות בשוק לוינסקי",
+        description: "שוק לוינסקי הוא מקום שירגש אנשים שחושבים על אוכל, זהו שוק בוטיק, שיק-שוק. אחרי שעשיתם קניות - תבואו לפה למצוא את הטעם. בסיור נספר איך הפכה השכונה מפרדס לנקודת מפגש בין הבלקן לפרס, נבקר במעדניות, המאפיות וחנויות התבלינים, נטעם דליקטסנים מדוקדקים ומאפים שומניים, ונקנה גם הביתה, להשאר עם טעם של עוד.",
+        image: { src: "/rd.png", alt: "סיור בפלורנטין" }
+      },
+      {
+        name: "סיור טעימות בשוק הפשפשים",
+        description: "מגזינים בינלאומיים מכתירים את שוק הפשפשים כאחת מעשרים השכונות המגניבות ביותר בעולם. יש פה שילוב מופלא בין ישן לחדש, בין חנויות מזכרות לגלריות, ובין פישפשיות לבגדי מעצבים. היצע האוכל של שוק הפשפשים ביפו יושב על קו התפר הקולינרי שבין המטבח השאמי למטבח הישראלי. תמצאו כאן גרסאות חדשות למנות אהובות לצד מוסדות שלא שינו דבר כבר דורות, ישן וחדש מתערבבים יחד בלב יפו.",
+               image: { src: "/rd.png", alt: "סיור בנחלת בנימין" }
+      },
+      {
+        name: "סיור טעימות בשוק הכרמל",
+        description: "השוק המפורסם, הרועש, והשמח בעיר - צבעוני ומלא חיים. תמצאו כאן מקומיים בקניות לשבת לצד תיירים בבגדי ים, תמצאו כאן רוכלים צעקניים לצד פינות שקטות בהן הזמן עצר מלכת. כל הקשת הרחבה של המטבח הישראלי מיוצגת כאן בגאווה, אוכל רחוב כמו פעם לצד טייקים של שפים צעירים על מנות מוכרות, ולנו נותר רק לבקש מנות קטנות כדי שישאר מקום לעוד. ",
+             image: { src: "/rd.png", alt: "סיור בקריית המלאכה" }
+      },
+      {
+        name: "סיור טעימות בשוק התקווה",
+        description: "שוק התקווה הוא השוק הכי אמיתי בעיר, מקום לעשות בו קניות לשבת. הוא גם הרחב ביותר והנעים ביותר לשיטוט בין הדוכנים, עמוס טעמים וסיפורים. בסיור נכיר את סיפורה של שכונת התקווה, איך התפתחה במשך השנים כמערכת חברתית כמעט נפרדת משאר העיר ועל השינויים הגדולים העומדים בפניה בשנים הקרובות. בשוק נבקר במוסדות מקומיים ונטעם משלל מאכלי עדות ומנות מסורתיות. ",
+                  image: { src: "/rd.png", alt: "סיור בקריית המלאכה" }
+      },
+    ]
+  },
+  en: {
+    title: "Food Tours",
+    subtitle: "City Food for Everyone",
+    trips: [
+      {
+        name: "Levinsky Market Food Tour",
+        description: "Levinsky Market is a place that will excite people who think about food, it is a boutique market, a chic market. After you have done your shopping - come here to find the taste. On the tour we will tell how the neighborhood from Pardes became a meeting point between the Balkans and Persia, we will visit the delicatessens, bakeries and spice shops, we will taste meticulous delicacies and fatty pastries, and we will also buy some for home, to stay with a taste for more.",
+        image: { src: "/rd.png", alt: "Levinsky Market Food Tour", }
+      },
+      {
+        name: "Flea Market Food Tour",
+        description: "International magazines have named the flea market one of the twenty coolest neighborhoods in the world. There is a wonderful combination of old and new, souvenir shops and galleries, and flea markets and designer clothes. The food scene at the Jaffa Flea Market sits on the culinary seam between Shami and Israeli cuisine. Here you'll find new versions of beloved dishes alongside institutions that haven't changed in generations, old and new mingling together in the heart of Jaffa.",
+        image: { src:"/rd.png", alt:"Flea Market Food Tour",}
+      },
+      {
+        name: "Carmel Market Food Tour",
+        description: "The famous, noisy, and happy market in the city - colorful and lively. Here you will find locals shopping and sitting next to tourists in swimsuits, here you will find loud vendors next to quiet corners where time has stopped. The entire wide spectrum of Israeli cuisine is proudly represented here, street food as it used to be alongside young chefs' takes on familiar dishes, and all we have to do is ask for small portions so that there is room for more.",
+            image: { src: "/rd.png", alt: "Carmel Market Food Tour", }
+      },
+            {
+        name: "Tikva Market Food Tour",
+        description: "The Tikva Market is the most authentic market in the city, a place to shop for Shabbat. It is also the widest and most pleasant to wander through the stalls, full of flavors and stories. On the tour we will learn the story of the Hatikva neighborhood, how it developed over the years as a social system almost separate from the rest of the city and the major changes it faces in the coming years. At the market we will visit local institutions and taste a variety of ethnic foods and traditional dishes.",
+                   image: { src: "/rd.png", alt: "Tikva Market Food Tour" }
+      },
+
+    ]
+  }
+};
+
+const { title, subtitle, trips } = content[lang];
+---
+
+<BaseLayout pageTitle={title} lang={lang} dir={lang === 'he' ? 'rtl' : 'ltr'}>
+  <section class="py-16 md:py-24 px-4">
+    <div class="container mx-auto flex flex-col gap-12">
+ 
+      <Box className="p-8 bg-[#a0aebd] text-[#6B7C8F]">
+        <Title text={title} size="lg" className="mb-2" />
+        <Title text={subtitle} size="md" className="mb-6" />
+      </Box>
+
+      {trips.map((trip, idx) => (
+        <Box  className="flex flex-col md:flex-row gap-6 p-6 bg-[#F8FCFE] text-[#6B7C8F] shadow-lg rounded-lg">
+          {trip.image && (
+            <div class="md:w-1/3 flex-shrink-0 rounded-lg overflow-hidden">
+              <img src={trip.image.src} alt={trip.image.alt}   class="w-full h-48 md:h-56 object-cover rounded-lg" />
+            </div>
+          )}
+          <div class="flex-1 flex flex-col gap-4">
+            <Title text={trip.name} size="md" />
+            <p class="text-gray-700 leading-relaxed">{trip.description}</p>
+          </div>
+        </Box>
+      ))}
+
+    </div>
+      <section class="max-w-xl mx-auto px-4 py-12">
+    <ContactForm  lang={lang} client:only="react" />
+  </section>
+  <section class="max-w-6xl mx-auto px-4 py-12">
+        <div class="text-center">
+      <Button
+        text={lang === "he" ? "חזרה לעמוד הבית" : "Back to home page"}
+        href={`/${lang}/`}
+        variant="secondary"
+      />
+    </div>
+  </section>
+
+  </section>
+</BaseLayout>

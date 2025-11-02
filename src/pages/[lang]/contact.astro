@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { ContactForm, Button } from "../../components/ui.tsx";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'he' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const lang = (Astro.params.lang === 'en' || Astro.params.lang === 'he') ? Astro.params.lang : 'he';
+
+const t = {
+  he: {
+    title: "צרו קשר",
+
+  },
+  en: {
+    title: "Contact Us",
+
+  },
+}[lang];
+---
+
+<BaseLayout pageTitle={t.title} lang={lang} dir={lang === 'he' ? 'rtl' : 'ltr'}>
+  <section class="max-w-xl mx-auto px-4 py-12">
+    <ContactForm lang={lang} client:only="react" />
+  </section>
+          <div class="text-center">
+      <Button
+        text={lang === "he" ? "חזרה לעמוד הבית" : "Back to home page"}
+        href={`/${lang}/`}
+        variant="secondary"
+      />
+    </div>
+</BaseLayout>
