@@ -13,8 +13,8 @@ export function getStaticPaths() {
 const lang = (Astro.params.lang === 'he' || Astro.params.lang === 'en') ? Astro.params.lang : 'he';
 const content = {
   he: {
-    title: "טעימות גרפיטי ואמנות רחוב",
-    subtitle: "מסלולים טעימים לכל גיל",
+    title: "סיורי אוכל",
+    subtitle: "",
     trips: [
       {
         name: "סיור טעימות בשוק לוינסקי",
@@ -40,7 +40,7 @@ const content = {
   },
   en: {
     title: "Food Tours",
-    subtitle: "City Food for Everyone",
+    subtitle: "",
     trips: [
       {
         name: "Levinsky Market Food Tour",
@@ -70,42 +70,55 @@ const content = {
 const { title, subtitle, trips } = content[lang];
 ---
 
-<BaseLayout pageTitle={title} lang={lang} dir={lang === 'he' ? 'rtl' : 'ltr'}>
-  <section class="py-16 md:py-24 px-4">
-    <div class="container mx-auto flex flex-col gap-12">
- 
-      <Box className="p-8 bg-[#a0aebd] text-[#6B7C8F]">
-        <Title text={title} size="lg" className="mb-2" />
-        <Title text={subtitle} size="md" className="mb-6" />
-      </Box>
+<BaseLayout pageTitle={title} lang={lang}>
+  <section class="pb-16 px-4">
+    <!-- Top button -->
+    <div class="container mx-auto">
+      <Button
+        text={lang === "he" ? "חזרה לעמוד הבית" : "Back to home page"}
+        href={`/${lang}/`}
+        variant="primary"
+        className="mt-2 mb-6 md:mt-0 md:mb-8"
+      />
+    </div>
 
-      {trips.map((trip, idx) => (
-        <Box  className="flex flex-col md:flex-row gap-6 p-6 bg-[#F8FCFE] text-[#6B7C8F] shadow-lg rounded-lg">
-          {trip.image && (
-            <div class="md:w-1/3 flex-shrink-0 rounded-lg overflow-hidden">
-              <img src={trip.image.src} alt={trip.image.alt}   class="w-full h-48 md:h-56 object-cover rounded-lg" />
-            </div>
-          )}
-          <div class="flex-1 flex flex-col gap-4">
+    <!-- Header -->
+    <div class="container mx-auto flex flex-col items-center text-center gap-4 mb-12">
+      <Title text={title} size="lg" />
+      <Title text={subtitle} size="md" className="opacity-90" />
+    </div>
+
+    <!-- Trips list -->
+    <div class="container mx-auto flex flex-col gap-8 md:gap-12">
+      {trips.map((trip) => (
+        <Box className="flex flex-col md:flex-row gap-6 p-6 border border-[var(--light)] rounded-lg shadow-md">
+          <img
+            src={trip.image.src}
+            alt={trip.name}
+            class="w-full md:w-1/3 h-56 object-cover rounded-lg"
+          />
+          <div class="flex-1 flex flex-col gap-3">
             <Title text={trip.name} size="md" />
-            <p class="text-gray-700 leading-relaxed">{trip.description}</p>
+            <p class="text-[1.1rem] leading-relaxed text-[var(--light)]">
+              {trip.description}
+            </p>
           </div>
         </Box>
       ))}
-
     </div>
-      <section class="max-w-xl mx-auto px-4 py-12">
-    <ContactForm  lang={lang} client:only="react" />
-  </section>
-  <section class="max-w-6xl mx-auto px-4 py-12">
-        <div class="text-center">
+
+    <!-- Contact -->
+    <section class="max-w-xl mx-auto px-4 py-16">
+      <ContactForm lang={lang} client:only="react" />
+    </section>
+
+    <!-- Footer button -->
+    <div class="text-center py-12">
       <Button
         text={lang === "he" ? "חזרה לעמוד הבית" : "Back to home page"}
         href={`/${lang}/`}
         variant="secondary"
       />
     </div>
-  </section>
-
   </section>
 </BaseLayout>

@@ -1,8 +1,8 @@
 /* -------------------- Tailwind Design Tokens -------------------- */
 export const TW = {
   colors: {
-    bg: "bg-[#6B7C8F]",
-    accent: "text-[#E8E9EB]",
+    bg: "bg-[var(--main)]",
+    accent: "text-[var(--accent)]",
     line: "bg-white/30",
     dot: "bg-white",
     
@@ -12,20 +12,20 @@ export const TW = {
     primary: "bg-white/20 text-white hover:bg-white/40",
     secondary: "bg-white text-[#6B7C8F] hover:bg-[#E8E9EB]",
             roundbase: "p-2  items-center justify-center",
-    round: "w-16 h-16 rounded-full  bg-white items-center justify-center ",
+    round: "w-12 h-12 rounded-full  bg-[var(--light)] items-center justify-center ",
 
   },
   titles: {
-    sm: "text-xl font-semibold text-[#F8FCFE]",
-    md: "text-3xl font-bold text-[#F8FCFE]",
-    lg: "text-5xl font-extrabold text-[#F8FCFE]",
+    sm: "text-xl font-semibold text-[var(--light)]",
+    md: "text-3xl font-bold text-[var(--light)]",
+    lg: "text-5xl font-extrabold text-[var(--light)]",
   },
   text: {
     base: "text-white/90",
     secondary: "text-white/70",
   },
   containers: {
-    box: "p-6 rounded-lg shadow-lg bg-[#a0aebd]"},
+    box: "p-6 rounded-lg shadow-lg bg-[var(--accent)] text-[var(--light)]"},
     images: {
     default: "w-full rounded-lg shadow-lg",
   },}
@@ -194,7 +194,7 @@ export function ContactForm({ lang }: ContactFormProps) {
     <form
       method="POST"
       action="/api/contact"
-      className="space-y-4 w-full max-w-md mx-auto text-center bg-[#6B7C8F]"
+      className="space-y-4 w-full max-w-md mx-auto text-center bg-[var(--main)]"
     >
       <Title text={t.title} size="md" className="mb-6" />
 

@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Title, Button, Box } from '../../components/ui';
+
+// determine language from URL
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'he' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const lang =
+  Astro.params.lang === 'he' || Astro.params.lang === 'en'
+    ? Astro.params.lang
+    : 'he';
+
+const content = {
+  he: {
+    title: "העמוד לא נמצא 😕",
+    message: "נראה שהגעת לכתובת שלא קיימת באתר.",
+    button: "חזרה לעמוד הבית",
+  },
+  en: {
+    title: "Page Not Found 😕",
+    message: "It looks like you've reached a page that doesn’t exist.",
+    button: "Back to Home",
+  },
+};
+
+const { title, message, button } = content[lang];
+---
+
+<BaseLayout pageTitle={title} lang={lang}>
+  <section class="min-h-[70vh] flex flex-col justify-center items-center text-center px-4">
+    <Box className="p-8 max-w-lg mx-auto flex flex-col items-center gap-6 border border-[var(--light)] rounded-lg shadow-md">
+      <Title text={title} size="lg" />
+      <p class="text-[1.1rem] text-[var(--light)] leading-relaxed">{message}</p>
+      <Button
+        text={button}
+        href={`/${lang}/`}
+        variant="primary"
+      />
+    </Box>
+  </section>
+</BaseLayout>

@@ -94,7 +94,7 @@ useLayoutEffect(() => {
                 cy={y}
                 r="7"
                 fill="#CBD8E4"
-                stroke="#8C9DB3"
+                stroke="#6c86a4"
                 strokeWidth="2.5"
                 className="cursor-pointer transition-transform duration-300 hover:scale-110"
               />
@@ -104,7 +104,7 @@ useLayoutEffect(() => {
   cy={y}
   r="10"
     fill="#CBD8E4"
-                stroke="#8C9DB3"
+                stroke="#6c86a4"
                   strokeWidth="2"
   initial={{ scale: 1 }}
   animate={{
